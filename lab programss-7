@@ -1,0 +1,162 @@
+###LAB-7
+LOW
+***1
+def show_employee(name, salary=9000):
+    print("Employee Name:", name)
+    print("Employee Salary:", salary)
+show_employee("John", 10000)  
+show_employee("Alice") 
+
+***2.
+def func1(*args):
+    for arg in args:
+        print("Argument:", arg)
+func1(1, 2, 3, "Hello", [4, 5, 6])
+
+***3
+def print_name_and_age(name, age):
+    print("Name:", name)
+    print("Age:", age)
+print_name_and_age("Alice", 30)
+
+**4
+def unique_elements(input_list):
+    return list(set(input_list))
+sample_list = [1, 2, 3, 3, 3, 3, 4, 5]
+unique_list = unique_elements(sample_list)
+print("Sample List:", sample_list)
+print("Unique List:", unique_list)
+       
+**MEDIUM LEVEL**
+***1
+def power(base, exp=2):
+    return base ** exp
+result1 = power(2, 3)  
+print("Result 1:", result1) 
+result2 = power(4) 
+print("Result 2:", result2)  
+
+***2
+def reverse_list(input_list):
+    return input_list[::-1]
+original_list = [1, 2, 3, 4, 5]
+reversed_list = reverse_list(original_list)
+print("Original List:", original_list)
+print("Reversed List:", reversed_list)
+
+***3
+def compute(num1, num2):
+    sum_result = num1 + num2
+    difference_result = num1 - num2
+    product_result = num1 * num2
+    if num2 != 0:
+        quotient_result = num1 / num2
+    else:
+        quotient_result = "Cannot divide by zero"
+    return sum_result, difference_result, product_result, quotient_result
+result = compute(10, 5)
+print("Sum:", result[0])
+print("Difference:", result[1])
+print("Product:", result[2])
+print("Quotient:", result[3])
+
+***4
+def student_info(name, **kwargs):
+    info_string = "Student Name: {}\n".format(name)
+    if 'age' in kwargs:
+        info_string += "Age: {}\n".format(kwargs['age'])
+    if 'grade' in kwargs:
+        info_string += "Grade: {}\n".format(kwargs['grade'])
+    if 'school' in kwargs:
+        info_string += "School: {}\n".format(kwargs['school'])
+    print(info_string)
+student_info("Alice", age=15, grade=10, school="XYZ High School")
+
+***5
+def is_prime(num):
+    if num < 2:
+        return False
+    for i in range(2, int(num**0.5) + 1):
+        if num % i == 0:
+            return False
+    return True
+
+def generate_primes(limit):
+    for num in range(2, limit):
+        if is_prime(num):
+            yield num
+limit = 20
+prime_generator = generate_primes(limit)
+print(f"Prime numbers up to {limit}:")
+for prime in prime_generator:
+    print(prime, end=" ")
+
+***6
+def apply_function_to_list(func, values):
+    return [func(value) for value in values]
+def square(x):
+    return x ** 2
+
+values = [1, 2, 3, 4, 5]
+results = apply_function_to_list(square, values)
+print("Original values:", values)
+print("Squared values:", results)
+
+***7
+def fibonacci_generator():
+    a, b = 0, 1
+    while True:
+        yield a
+        a, b = b, a + b
+fib_gen = fibonacci_generator()
+for _ in range(10):  
+    print(next(fib_gen))
+
+***8
+def factorial(n):
+    if n == 0 or n == 1:
+        return 1
+    else:
+        return n * factorial(n - 1)
+number = 5
+result = factorial(number)
+print(f"The factorial of {number} is:", result)
+
+***HIGH***
+***1
+def count_departments(org_chart):
+    total_departments = 1  
+    for sub_department in org_chart.values():
+        if sub_department:  
+            total_departments += count_departments(sub_department)
+    return total_departments
+org_chart = {
+    'Engineering': {
+        'Development': {},
+        'QA': {
+            'Automation': {},
+            'Manual': {}
+        }
+    },
+    'HR': {},
+    'Finance': {
+        'Accounts': {},
+        'Budgeting': {}
+    }
+}
+
+total_departments = count_departments(org_chart)
+print("Total number of departments:", total_departments)
+
+***2
+def generate_pascals_triangle(n):
+    triangle = []
+    for i in range(n):
+        row = [1] * (i + 1)
+        for j in range(1, i):
+            row[j] = triangle[i - 1][j - 1] + triangle[i - 1][j]
+        triangle.append(row)
+    for row in triangle:
+        print(" ".join(map(str, row)).center(n*3))
+n = 5 
+generate_pascals_triangle(n)
